@@ -79,11 +79,13 @@ authRouter.post('/signin', [
                 _id: signinUser._id,
                 name: signinUser.name,
                 email: signinUser.email,
+                'success':true,
                 token: generateToken(signinUser),
             });
         } else {
             res.status(401).send({
-                message: 'Invalid user or password'
+                message: 'Invalid user or password',
+                'success':false
             });
         }
     }

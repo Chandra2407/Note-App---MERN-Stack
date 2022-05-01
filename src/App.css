@@ -1,5 +1,47 @@
-.App {
-  text-align: center;
+
+.navbar{
+  font-size: 1.6rem;
 }
 
-
+.home {
+  font-size: 2rem;
+}
+.home input,
+.home textarea{
+  font-size: 1.6rem;
+}
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.card{
+  min-width: 30rem;
+  max-width: 50rem;
+  margin: 1rem;
+  margin-right: 1.5rem;
+  font-size: 2rem;
+}
+.card i {
+  cursor: pointer;
+  font-size: 2rem;
+}
+.home button{
+  font-size: 1.8rem;
+}
+.modal *{
+  font-size: 1.8rem;
+}
+.nav-btn a{
+  font-size: 1.2rem;
+}
+.form-group input{
+  font-size: 1.8rem;
+  margin: 1rem 0;
+}
+.login-container button{
+  font-size: 2rem;
+  margin: 1rem 0;
+}
