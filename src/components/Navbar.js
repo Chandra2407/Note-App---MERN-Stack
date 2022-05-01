@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = (props) => {
   let location = useLocation();
+  let navigate = useNavigate();
   useEffect(() => {
 
   }, [location])
-
+  const handleLogout = ()=>{
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -26,10 +31,10 @@ const Navbar = (props) => {
               <Link className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`} to="/users">Users </Link>
             </li>
           </ul>
-          <form className='d-flex nav-btn'>
+          {!localStorage.getItem('token')?<form className='d-flex nav-btn'>
               <Link className='btn btn-primary' to='/login' role='button'>Login</Link>    
               <Link className='btn btn-primary mx-2' to='/signup' role='button'>Sign up</Link>
-          </form>
+          </form>:<button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
         </div>
       </nav>
 

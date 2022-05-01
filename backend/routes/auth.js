@@ -39,14 +39,16 @@ authRouter.post("/register", [
     const createdUser = await user.save();
     if (!createdUser) {
         res.status(401).send({
-            message: 'Inavlid User Data'
+            message: 'Inavlid User Data',
+            'success':false
         });
     } else {
         res.send({
             _id: createdUser._id,
             name: createdUser.name,
             email: createdUser.email,
-            token: generateToken(createdUser)
+            token: generateToken(createdUser),
+            'success':true
         })
     }
 }))

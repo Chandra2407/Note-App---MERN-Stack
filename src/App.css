@@ -45,3 +45,7 @@
   font-size: 2rem;
   margin: 1rem 0;
 }
+.alertContainer{
+  position: fixed;
+  width: 100%;
+}

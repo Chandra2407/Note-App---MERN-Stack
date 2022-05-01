@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
     const [credentials, setCredentials] = useState({
         email:"",
         password:""
@@ -15,7 +15,6 @@ const Login = () => {
         const response = await fetch('http://localhost/api/auth/signin',{
             method:'POST',
             headers:{
-                'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVjMzM0NzNmNjQ1ODQyMmVhZjRiMmIiLCJuYW1lIjoiZ3JheSIsImVtYWlsIjoiZ3JheUBnbWFpbC5jb20iLCJpYXQiOjE2NTAyMTAxMzB9.3GVw_eRgEx6_4B3aBJmqyATRcAgLf3Zz_za2k_jSBcw',
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({email:credentials.email,password:credentials.password})
@@ -25,9 +24,10 @@ const Login = () => {
             //reirect
             localStorage.setItem('token',json.token);
             navigate('/');
+            props.showAlert('Successfully logged in','success');
         }
         else{
-            alert('invalid creentials')
+            props.showAlert('Invalid Credentials','danger');
         }
     }
     return (

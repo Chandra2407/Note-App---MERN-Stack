@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const SignUp = () => {
+const SignUp = (props) => {
   let navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
@@ -22,9 +22,14 @@ const SignUp = () => {
         body: JSON.stringify({ name,email,password})
       });
       const json = await response.json();
-        //reirect
+        if(json.success){
         localStorage.setItem('token', json.token);
         navigate('/');
+        props.showAlert('User created successfully','success');
+        }
+        else{
+          props.showAlert('Invalid Credentials','danger');
+        }
     }
   }
   const handleChange = (e) => {
@@ -35,20 +40,20 @@ const SignUp = () => {
       <form className='login-container container' onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="exampleInputName">User name</label>
-          <input type="text" className="form-control" onChange={handleChange} name='name' id="exampleInputName" placeholder="Enter user name" />
+          <input type="text" className="form-control" onChange={handleChange} name='name' id="exampleInputName" placeholder="Enter user name" minLength={4} required/>
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
-          <input type="email" className="form-control" onChange={handleChange} name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+          <input type="email" className="form-control" onChange={handleChange} name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" minLength={4} required/>
           <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
-          <input type="password" className="form-control" onChange={handleChange} name='password' id="exampleInputPassword1" placeholder="Password" />
+          <input type="password" className="form-control" onChange={handleChange} name='password' id="exampleInputPassword1" placeholder="Password" minLength={4} required />
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPasswordConfirm">Confirm Password</label>
-          <input type="password" className="form-control" onChange={handleChange} name='passwordconfirm' id="exampleInputPasswordConfirm" placeholder="Confirm password" />
+          <input type="password" className="form-control" onChange={handleChange} name='passwordconfirm' id="exampleInputPasswordConfirm" placeholder="Confirm password" minLength={4} required />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
